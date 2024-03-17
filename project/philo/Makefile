@@ -4,17 +4,19 @@ CDEBUG = -g3
 PTHREAD_FLAG = -lpthread
 CFLAGS=-Wall -Wextra -Werror -MMD -MP ${CDEBUG}
 
-SRC_DIR=./philo
+SRC_DIR=.
 OBJ_DIR=./obj
 INC_DIR=./inc
+
 
 #BONUS_SRC_DIR=./bonus_src
 #BONUS_INC_DIR=./bonus_inc
 
-SRC_FILES=	ft_args.c			\
-			ft_utils_atoi.c		\
-			ft_utils_ctoi.c		\
-			ft_utils_isdigit.c	\
+SRC_FILES=	ft_args.c				\
+			ft_utils_atoi.c			\
+			ft_utils_ctoi.c			\
+			ft_utils_contains_num.c	\
+			ft_utils_isdigit.c		\
 			philo.c
 
 #BONUS_SRC_FILES=	

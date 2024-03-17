@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:14:51 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/17 01:10:07 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/03/17 23:11:35 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_bool	ft_args_validate(char **argv, int argc)
 		return (FALSE);
 	}
 	i = 1;
-	while (i < argc)
+	while (i < (size_t)argc)
 	{
 		if (ft_utils_contains_num(argv[i]) == FALSE)
 		{
-			printf("ERROR: arg %s is NOT numeric\n", argv[i]);
+			printf("ERROR: arg %s is NOT valid\n", argv[i]);
 			return (FALSE);
 		}
 		i++;
