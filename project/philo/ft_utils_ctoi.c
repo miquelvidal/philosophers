@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_ctoi.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:36:37 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/17 01:03:04 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:03:42 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_utils_ctoi(char number)
 {
-	return ('0' + ('9' - number));
+	return (number - '0');
 }

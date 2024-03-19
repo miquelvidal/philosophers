@@ -6,10 +6,11 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/17 23:48:35 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/19 23:17:45 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_fork.h"
 
 t_fork	ft_fork_new(size_t num)
@@ -32,6 +33,7 @@ t_fork	*ft_fork_init(size_t total)
 	while (i < total)
 	{
 		forks[i] = ft_fork_new(i);
+		i++;
 	}
 	return (forks);
 }

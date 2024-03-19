@@ -2,7 +2,7 @@ NAME=philo
 #CDEBUG = -g3 -fsanitize=address
 CDEBUG = -g3
 PTHREAD_FLAG = -lpthread
-CFLAGS=-Wall -Wextra -Werror -MMD -MP ${CDEBUG}
+CFLAGS=-Wall -Wextra -Werror -MMD -MP ${CDEBUG} ${PTHREAD_FLAG}
 
 SRC_DIR=.
 OBJ_DIR=./obj
@@ -13,6 +13,9 @@ INC_DIR=./inc
 #BONUS_INC_DIR=./bonus_inc
 
 SRC_FILES=	ft_args.c				\
+			ft_fork.c				\
+			ft_philosopher.c		\
+			ft_thread.c				\
 			ft_utils_atoi.c			\
 			ft_utils_ctoi.c			\
 			ft_utils_contains_num.c	\

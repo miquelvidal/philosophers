@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:03:25 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/17 23:40:49 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/19 23:07:02 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ typedef struct s_philosopher
 }   t_philosopher;
 
 t_philosopher   *ft_philosopher_init(t_args args);
-t_philosopher	ft_philosopher_new(size_t num_philo, t_args args);
-void            ft_philosopher_destroy(t_philosopher *philosophers);
+t_philosopher	ft_philosopher_new(size_t num_philo);
+void            ft_philosopher_free(t_philosopher *philosophers);
+void            ft_philosopher_destroy(t_philosopher *philosophers, size_t num_philo);
+void			*ft_philosopher_execute(void *arg);
 
 #endif
