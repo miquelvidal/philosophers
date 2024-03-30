@@ -15,6 +15,7 @@ INC_DIR=./inc
 SRC_FILES=	ft_args.c				\
 			ft_fork.c				\
 			ft_philosopher.c		\
+			ft_table.c				\
 			ft_thread.c				\
 			ft_utils_atoi.c			\
 			ft_utils_ctoi.c			\

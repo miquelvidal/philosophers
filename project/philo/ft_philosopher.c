@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:25:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/19 23:17:14 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:06:05 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,22 @@ t_philosopher	ft_philosopher_new(size_t num_philo)
 	return (philosopher);
 }
 
-t_philosopher   *ft_philosopher_init(t_args args)
+t_philosopher_set   ft_philosophers_init(t_args args)
 {
-	t_philosopher	*philosophers;
-	size_t			i;
+	t_philosopher_set	philo;
+	size_t				i;
 
-	philosophers = (t_philosopher *)malloc(args.num_philo * sizeof(t_philosopher));
-	if (philosophers == NULL)
-		return (NULL);
+	philo.philosophers = (t_philosopher *)malloc(args.num_philo * sizeof(t_philosopher));
+	if (philo.philosophers == NULL)
+		return (philo);
+	philo.total = args.num_philo;
 	i = 0;
 	while (i < args.num_philo)
 	{
-		philosophers[i] = ft_philosopher_new(i);
+		philo.philosophers[i] = ft_philosopher_new(i);
 		i++;
 	}
-	return (philosophers);
+	return (philo);
 }
 
 void	ft_philosopher_free(t_philosopher *philosophers)
@@ -50,19 +51,20 @@ void	ft_philosopher_free(t_philosopher *philosophers)
 	philosophers++;
 }
 
-void	ft_philosopher_destroy(t_philosopher *philosophers, size_t num_philo)
+void	ft_philosophers_destroy(t_philosopher_set *philo)
 {
 	size_t	i;
 
-	if ( philosophers != NULL)
+	if ( philo->philosophers != NULL)
 	{
 		i = 0;
-		while (i < num_philo)
+		while (i < philo->total)
 		{
-			ft_philosopher_free(philosophers + i);
+			ft_philosopher_free(philo->philosophers + i);
 			i++;
 		}
-		free (philosophers);
+		free (philo->philosophers);
+		philo->philosophers = NULL;
 	}
 }
 

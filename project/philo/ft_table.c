@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_problem.c                                       :+:      :+:    :+:   */
+/*   ft_table.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:53:56 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/17 23:55:40 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:43:23 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_problem.h"
+#include "ft_table.h"
+#include <pthread.h>
 
-void	ft_problem_destroy(t_problem *problem)
+void	ft_table_destroy(t_table *table)
 {
-	if (problem->forks != NULL)
+	if (table->forks_set.forks != NULL)
 	{
-		ft_fork_destroy(problem->forks);
+		ft_forks_destroy(&table->forks_set);
 	}
-	if (problem->philosophers != NULL)
+	if (table->philosophers_set.philosophers != NULL)
 	{
-		ft_philosopher_destroy(problem->philosophers);
+		ft_philosophers_destroy(&table->philosophers_set);
 	}
 }
+
+t_bool  ft_table_pickup_forks(t_table *table, int num_philosopher)
+{
+    /*
+    pthread_mutex_lock(&table->forks->mutex);
+    num_philosopher++;
+    pthread_mutex_unlock(&table->forks->mutex);
+    return (TRUE);
+    */
+   (void) table;
+   num_philosopher++;
+    return (TRUE);
+}
+
