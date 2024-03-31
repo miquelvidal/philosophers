@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_table.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:53:56 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/30 18:43:23 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/31 00:08:26 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_table.h"
 #include <pthread.h>
+#include "ft_table.h"
+#include "ft_args.h"
 
 void	ft_table_destroy(t_table *table)
 {
@@ -38,3 +39,12 @@ t_bool  ft_table_pickup_forks(t_table *table, int num_philosopher)
     return (TRUE);
 }
 
+t_table ft_table_init(t_args args)
+{
+    t_table table;
+    table.forks_set = ft_forks_init(args.num_philo);
+    table.philosophers_set = ft_philosophers_init(args, table.forks_set);   
+    table.end = ft_mutex_bvalue_init(FALSE);
+    table.rules = ft_rules_args_2_rules(args);
+    return (table);
+}

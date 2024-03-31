@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:48:04 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/30 18:45:46 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/31 00:36:12 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 #include "ft_philosopher.h"
 
 
-static  void    ft_main_init_table(t_args args, t_table *table)
+void    ft_main_run_simulation(t_table *table)
 {
-    table->philosophers_set = ft_philosophers_init(args);   
+    while (ft_mutex_bvalue_get(&table->end) == FALSE)
+    {
+        
+    }
 }
 
 int main(int argc, char **argv)
@@ -31,11 +34,12 @@ int main(int argc, char **argv)
  
     if (ft_args_validate(argv, argc) == FALSE)
         return (EXIT_FAILURE);
-    args = ft_args_parse(argv, argc);
-    ft_main_init_table(args, &table);
-    ft_thread_create_threads(table);
+    args    = ft_args_parse(argv, argc);
+    table   = ft_table_init(args);
+    ft_thread_create_threads(&table);
+    ft_main_run_simulation(&table);
     ft_thread_join_threads(&table.philosophers_set);
     ft_philosophers_destroy(&table.philosophers_set);
     printf("FINITO\n");
-    return (EXIT_SUCCESS);
+    exit (EXIT_SUCCESS);
 }

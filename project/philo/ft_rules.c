@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_thread.h                                        :+:      :+:    :+:   */
+/*   ft_rules.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 23:19:50 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/31 00:34:00 by greus-ro         ###   ########.fr       */
+/*   Created: 2024/03/30 23:53:20 by greus-ro          #+#    #+#             */
+/*   Updated: 2024/03/30 23:58:31 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_THREADS_H
-# define FT_THREADS_H
+#include "ft_rules.h"
 
-# include "ft_philosopher.h"
-# include "ft_table.h"
+t_rules	ft_rules_args_2_rules(t_args args)
+{
+	t_rules rules;
 
-int	ft_thread_sleep(int milliseconds);
-//int ft_thread_create_threads(t_philosopher_set *philo);
-int ft_thread_create_threads(t_table *table);
-int	ft_thread_join_threads(t_philosopher_set *philo);
-
-#endif
+	rules.number_eats	= args.num_must_eat;
+	rules.time_to_die	= args.time_to_die;
+	rules.time_to_eat	= args.time_to_eat;
+	rules.time_to_sleep = args.time_to_sleep;
+	return (rules);
+}
