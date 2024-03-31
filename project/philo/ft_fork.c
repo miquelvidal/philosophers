@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/30 18:13:02 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/03/31 23:48:55 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "ft_fork.h"
+#include "ft_timestamp.h"
 
 t_fork	ft_fork_new(size_t num)
 {
@@ -64,8 +66,8 @@ void	ft_forks_destroy(t_fork_set *_forks)
 
 int			ft_fork_pickup(t_fork *fork)
 {
-	int mutex_return;
-
+	int 		mutex_return;
+	
 	mutex_return = pthread_mutex_lock(&fork->mutex);
 	return (mutex_return);
 }

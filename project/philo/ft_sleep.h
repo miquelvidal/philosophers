@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_timestamp.h                                     :+:      :+:    :+:   */
+/*   ft_sleep.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/31 00:36:52 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/31 23:42:19 by greus-ro         ###   ########.fr       */
+/*   Created: 2024/03/31 23:07:01 by greus-ro          #+#    #+#             */
+/*   Updated: 2024/03/31 23:25:05 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TIMESTAMP_H
-# define FT_TIMESTAMP_H
+#ifndef FT_SLEEP_H
+# define FT_SLEEP_H
 
-typedef	unsigned long long	t_timestamp;
-
-t_timestamp	ft_timestamp_get(void);
+void	ft_sleep(long millisecs);
 
 #endif

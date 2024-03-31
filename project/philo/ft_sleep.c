@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_timestamp.h                                     :+:      :+:    :+:   */
+/*   ft_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/31 00:36:52 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/31 23:42:19 by greus-ro         ###   ########.fr       */
+/*   Created: 2024/03/31 23:24:21 by greus-ro          #+#    #+#             */
+/*   Updated: 2024/04/01 00:41:56 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TIMESTAMP_H
-# define FT_TIMESTAMP_H
+#include <unistd.h>
+#include "ft_timestamp.h"
 
-typedef	unsigned long long	t_timestamp;
+int	ft_sleep(unsigned long millisecs)
+{
+	t_timestamp init_time;
+	t_timestamp now;
+	int			err;
 
-t_timestamp	ft_timestamp_get(void);
-
-#endif
+	init_time = ft_timestamp_get();
+	now = init_time;
+	while(now - init_time < millisecs)
+	{
+		err = usleep(50);
+		if (err < 0)
+			return (err);
+		now = ft_timestamp_get();
+	}
+	return (0);
+}
