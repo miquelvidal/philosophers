@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:25:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/01 16:51:09 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:25:25 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,19 +133,24 @@ void	ft_philosopher_eat(t_philosopher *philo)
 	timestamp = ft_timestamp_get();
 	ft_thread_printf(philo, "has taken a fork", timestamp - philo->start_time);
 	//printf("%llu %d has taken a fork\n", timestamp - philo->start_time, philo->number);
-	timestamp = ft_timestamp_get();
-	//printf("%llu %d is eating\n",timestamp - philo->start_time, philo->number);
-	ft_thread_printf(philo, "is eating", timestamp - philo->start_time);
-	ft_sleep(philo->rules.time_to_eat);
-	ft_mutex_meal_update(&philo->meals, timestamp);
-	ft_fork_drop(philo->r_fork);
-	ft_fork_drop(philo->l_fork);
+	if (ft_mutex_bvalue_get(philo->end) == FALSE)
+	{
+		timestamp = ft_timestamp_get();
+		ft_mutex_meal_update(&philo->meals, timestamp);
+		//printf("%llu %d is eating\n",timestamp - philo->start_time, philo->number);
+		ft_thread_printf(philo, "is eating", timestamp - philo->start_time);
+		ft_sleep(philo->rules.time_to_eat);
+	}
+	//ft_fork_drop(philo->r_fork);
+	//ft_fork_drop(philo->l_fork);
 }
 
 void	ft_philosopher_sleep(t_philosopher *philo)
 {
 	t_timestamp	timestamp;
-	
+
+	ft_fork_drop(philo->r_fork);
+	ft_fork_drop(philo->l_fork);
 	philo->status = PHILO_STATUS_SLEEP;
 	timestamp = ft_timestamp_get();
 	ft_thread_printf(philo, "is sleeping", timestamp - philo->start_time);

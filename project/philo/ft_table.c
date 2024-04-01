@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:53:56 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/01 17:01:51 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:09:21 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_table_destroy(t_table *table)
 	{
 		ft_philosophers_destroy(&table->philosophers_set);
 	}
+    pthread_mutex_destroy(&table->log.mutex);
     pthread_mutex_destroy(&table->end.mutex);
     /*
     if (table->rules != NULL)
@@ -53,5 +54,6 @@ t_table ft_table_init(t_args args)
     table.forks_set = ft_forks_init(args.num_philo);
     table.philosophers_set = ft_philosophers_init(args, table.forks_set, table.rules);   
     table.end = ft_mutex_bvalue_init(FALSE);
+    table.log = ft_mutex_bvalue_init(TRUE);
     return (table);
 }

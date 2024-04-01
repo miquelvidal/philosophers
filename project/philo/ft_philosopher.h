@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:03:25 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/01 16:40:22 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:08:31 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_philosopher
 	t_fork			*r_fork;
 	pthread_t       thread;
 	t_mutex_bflag	*end;
+	t_mutex_bflag	*log;
 	t_mutex_meal	meals;
 	t_rules			rules;
 	t_bool			*start;
