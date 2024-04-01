@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:50:54 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/31 00:01:17 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:37:55 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_table
     t_bool              start;
     t_mutex_bflag       end;
     t_rules             rules;
+    t_timestamp         start_time;
 }	t_table;
 
 void	ft_table_destroy(t_table * table);

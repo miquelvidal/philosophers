@@ -6,16 +6,19 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:25:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/01 00:41:19 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:51:09 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_thread.h"
 #include "ft_args.h"
 #include "ft_philosopher.h"
 #include "ft_timestamp.h"
 #include "ft_sleep.h"
+
+//void	ft_thread_printf(t_philosopher *philo, t_timestamp time, const char *str); 
 
 t_philosopher	ft_philosopher_new(size_t num_philo)
 {
@@ -30,7 +33,8 @@ t_philosopher	ft_philosopher_new(size_t num_philo)
 	return (philosopher);
 }
 
-t_philosopher_set   ft_philosophers_init(t_args args, t_fork_set forks)
+//t_philosopher_set   ft_philosophers_init(t_args args, t_fork_set forks, t_rules *rules)
+t_philosopher_set   ft_philosophers_init(t_args args, t_fork_set forks, t_rules rules)
 {
 	t_philosopher_set	philo;
 	size_t				i;
@@ -44,10 +48,11 @@ t_philosopher_set   ft_philosophers_init(t_args args, t_fork_set forks)
 	{
 		philo.philosophers[i] = ft_philosopher_new(i);
 		ft_mutex_meal_init(&philo.philosophers[i].meals);
-		philo.philosophers[i].rules.number_eats		= args.num_must_eat;
-		philo.philosophers[i].rules.time_to_die		= args.time_to_die;
-		philo.philosophers[i].rules.time_to_eat 	= args.time_to_eat;
-		philo.philosophers[i].rules.time_to_sleep	= args.time_to_sleep;
+		philo.philosophers[i].rules.number_eats			= rules.number_eats;
+		philo.philosophers[i].rules.time_to_die			= rules.time_to_die;
+		philo.philosophers[i].rules.time_to_eat 		= rules.time_to_eat;
+		philo.philosophers[i].rules.time_to_sleep		= rules.time_to_sleep;
+		//philo.philosophers[i].rules.log					= rules.log;
 		if (i == philo.total -1 )
 		{
 			philo.philosophers[i].l_fork = &forks.forks[i];
@@ -88,12 +93,12 @@ void	ft_philosophers_destroy(t_philosopher_set *philo)
 	}
 }
 
-void	*ft_philosopher_execute(void *arg)
+void	*ft_philosopher_life(void *arg)
 {
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)arg;
-	printf("Hola! soy el thread %lu\n", philo->thread);
+	//printf("Hola! soy el thread %lu\n", philo->thread);
 	while (ft_mutex_bvalue_get(philo->end) == FALSE)
 	{
 		if (philo->status == PHILO_STATUS_INIT || philo->status == PHILO_STATUS_THINK)
@@ -122,12 +127,15 @@ void	ft_philosopher_eat(t_philosopher *philo)
 	philo->status = PHILO_STATUS_EAT;
 	ft_fork_pickup(philo->l_fork);
 	timestamp = ft_timestamp_get();
-	printf("%llu %d has taken a fork\n", timestamp, philo->number);
+	ft_thread_printf(philo, "has taken a fork", timestamp - philo->start_time);
+	//printf("%llu %d has taken a fork\n", timestamp - philo->start_time, philo->number);
 	ft_fork_pickup(philo->r_fork);
 	timestamp = ft_timestamp_get();
-	printf("%llu %d has taken a fork\n", timestamp, philo->number);
+	ft_thread_printf(philo, "has taken a fork", timestamp - philo->start_time);
+	//printf("%llu %d has taken a fork\n", timestamp - philo->start_time, philo->number);
 	timestamp = ft_timestamp_get();
-	printf("%llu %d is eating\n",timestamp, philo->number);
+	//printf("%llu %d is eating\n",timestamp - philo->start_time, philo->number);
+	ft_thread_printf(philo, "is eating", timestamp - philo->start_time);
 	ft_sleep(philo->rules.time_to_eat);
 	ft_mutex_meal_update(&philo->meals, timestamp);
 	ft_fork_drop(philo->r_fork);
@@ -140,7 +148,8 @@ void	ft_philosopher_sleep(t_philosopher *philo)
 	
 	philo->status = PHILO_STATUS_SLEEP;
 	timestamp = ft_timestamp_get();
-	printf("%llu %d is sleeping\n", timestamp, philo->number);
+	ft_thread_printf(philo, "is sleeping", timestamp - philo->start_time);
+	//printf("%llu %d is sleeping\n", timestamp - philo->start_time, philo->number);
 	ft_sleep(philo->rules.time_to_sleep);
 }
 
@@ -150,7 +159,8 @@ void	ft_philosopher_think(t_philosopher *philo)
 	
 	philo->status = PHILO_STATUS_THINK;
 	timestamp = ft_timestamp_get();
-	printf("%llu %d is thinking\n", timestamp, philo->number);
+	ft_thread_printf(philo, "is thinking", timestamp - philo->start_time);
+	//printf("%llu %d is thinking\n", timestamp - philo->start_time, philo->number);
 	//ft_sleep(philo->rules.time_to);
 }
 /*

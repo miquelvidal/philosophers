@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:03:25 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/01 00:40:26 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:40:22 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philosopher
 	t_mutex_meal	meals;
 	t_rules			rules;
 	t_bool			*start;
+	t_timestamp		start_time;
 
 }   t_philosopher;
 
@@ -47,11 +48,12 @@ typedef struct s_philosopher_set
 	t_philosopher   *philosophers;
 }   t_philosopher_set;
 
-t_philosopher_set	ft_philosophers_init(t_args args, t_fork_set forks);
+//t_philosopher_set	ft_philosophers_init(t_args args, t_fork_set forks, t_rules *rules);
+t_philosopher_set	ft_philosophers_init(t_args args, t_fork_set forks, t_rules rules);
 t_philosopher		ft_philosopher_new(size_t num_philo);
 void            	ft_philosopher_free(t_philosopher *philosopher);
 void            	ft_philosophers_destroy(t_philosopher_set *philosophers);
-void				*ft_philosopher_execute(void *arg);
+void				*ft_philosopher_life(void *arg);
 void				ft_philosopher_eat(t_philosopher *philo);
 void				ft_philosopher_sleep(t_philosopher *philo);
 void				ft_philosopher_think(t_philosopher *philo);

@@ -6,11 +6,10 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/03/31 23:48:55 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:02:04 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "ft_fork.h"
 #include "ft_timestamp.h"
@@ -56,6 +55,7 @@ void	ft_forks_destroy(t_fork_set *_forks)
 		while (i < _forks->num_forks )
 		{
 			pthread_mutex_destroy(&_forks->forks[i].mutex);
+			i++;
 		}
 		free (_forks->forks);
 		_forks->forks = NULL;
