@@ -26,6 +26,8 @@ SRC_FILES=	ft_args.c				\
 			ft_utils_ctoi.c			\
 			ft_utils_contains_num.c	\
 			ft_utils_isdigit.c		\
+			ft_utils_print.c		\
+			ft_utils_strlen.c		\
 			philo.c
 
 #BONUS_SRC_FILES=	

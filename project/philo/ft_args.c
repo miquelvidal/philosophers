@@ -6,22 +6,21 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:14:51 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/02 00:26:09 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:56:13 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
+#include <unistd.h>
 #include "ft_args.h"
 #include "ft_utils.h"
 
 t_bool	ft_args_validate_format(char **argv, int argc)
 {
 	size_t	i;
-	
+
 	if (argc < 5 || argc > 6)
 	{
-		printf("ERROR: number or args invalid\n");
+		ft_utils_print(STDERR_FILENO, "Invalid number of args\n");
 		return (FALSE);
 	}
 	i = 1;
@@ -29,7 +28,7 @@ t_bool	ft_args_validate_format(char **argv, int argc)
 	{
 		if (ft_utils_contains_num(argv[i]) == FALSE)
 		{
-			printf("ERROR: arg %s is NOT valid\n", argv[i]);
+			ft_utils_print(STDERR_FILENO, "Invalid format of args\n");
 			return (FALSE);
 		}
 		i++;
@@ -40,21 +39,83 @@ t_bool	ft_args_validate_format(char **argv, int argc)
 t_args	ft_args_parse(char **argv, int argc)
 {
 	t_args	args;
-	
-	args.num_philo		=		ft_utils_atoi(argv[1]);
-	args.time_to_die 	=		ft_utils_atoi(argv[2]);
-	args.time_to_eat	=		ft_utils_atoi(argv[3]);
-	args.time_to_sleep	=		ft_utils_atoi(argv[4]);
+
+	args.num_philo = ft_utils_atoi(argv[1]);
+	args.time_to_die = ft_utils_atoi(argv[2]);
+	args.time_to_eat = ft_utils_atoi(argv[3]);
+	args.time_to_sleep = ft_utils_atoi(argv[4]);
 	if (argc == 6)
-		args.num_must_eat	=	ft_utils_atoi(argv[5]);
+		args.num_must_eat = ft_utils_atoi(argv[5]);
+	else
+		args.num_must_eat = -1;
 	return (args);
+}
+
+static t_bool	ft_args_validate_optional_value(t_args args)
+{
+	if (args.num_must_eat == 0)
+	{
+		ft_utils_print(STDERR_FILENO, \
+			"Invalid number of times each philosopher must eat\n");
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
 t_bool	ft_args_validate_value(t_args	args)
 {
-	if (args.num_philo > 0)
-		return (TRUE);
-	else
+	if (args.num_philo <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid philosophers number\n");
 		return (FALSE);
-	
+	}
+	if (args.time_to_die <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to die\n");
+		return (FALSE);
+	}
+	if (args.time_to_eat <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to eat\n");
+		return (FALSE);
+	}
+	if (args.time_to_sleep <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to sleep\n");
+		return (FALSE);
+	}
+	return (ft_args_validate_optional_value(args));
 }
+
+/*
+t_bool	ft_args_validate_value(t_args	args)
+{
+	if (args.num_philo <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid philosophers number\n");
+		return (FALSE);
+	}
+	if (args.time_to_die <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to die\n");
+		return (FALSE);
+	}
+	if (args.time_to_eat <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to eat\n");
+		return (FALSE);
+	}
+	if (args.time_to_sleep <= 0)
+	{
+		ft_utils_print(STDERR_FILENO, "Invalid time to sleep\n");
+		return (FALSE);
+	}
+	if (args.num_must_eat == 0)
+	{
+		ft_utils_print(STDERR_FILENO, \
+			"Invalid number of times each philosopher must eat\n");
+		return (FALSE);
+	}
+	return (TRUE);
+}
+*/
