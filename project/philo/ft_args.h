@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:11:52 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/17 00:59:51 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:01:36 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_args
 }	t_args;
 
 t_args	ft_args_parse(char **argv, int argc);
-t_bool	ft_args_validate(char **argv, int argc);
+t_bool	ft_args_validate_format(char **argv, int argc);
+t_bool	ft_args_validate_value(t_args args);
 
 #endif

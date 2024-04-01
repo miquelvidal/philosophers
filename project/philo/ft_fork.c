@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/01 17:02:04 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:13:53 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,22 @@ void	ft_forks_destroy(t_fork_set *_forks)
 int			ft_fork_pickup(t_fork *fork)
 {
 	int 		mutex_return;
-	
-	mutex_return = pthread_mutex_lock(&fork->mutex);
-	return (mutex_return);
+	if (fork != NULL)
+	{
+		mutex_return = pthread_mutex_lock(&fork->mutex);		
+		return (mutex_return);
+	}
+	return (0);
 }
 
 int			ft_fork_drop(t_fork *fork)
 {
 	int mutex_return;
 
-	mutex_return = pthread_mutex_unlock(&fork->mutex);
-	return (mutex_return);
+	if (fork != NULL)
+	{
+		mutex_return = pthread_mutex_unlock(&fork->mutex);
+		return (mutex_return);
+	}
+	return (0);
 }

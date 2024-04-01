@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:19:28 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/01 17:14:17 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:25:25 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 //https://man7.org/linux/man-pages/man3/pthread_create.3.html
+//https://github.com/DeRuina/philosophers/blob/main/src/threads.c
 
 int	ft_thread_sleep(int milliseconds)
 {
@@ -43,7 +44,7 @@ int ft_thread_create_threads(t_table *table)
 		table->philosophers_set.philosophers[i].start = &table->start;
 		table->philosophers_set.philosophers[i].rules = table->rules;
 		if (table->philosophers_set.philosophers[i].number % 2 == 0)
-			ft_sleep(50);
+			ft_sleep(1);
 		pthread_create(&thread_id, NULL, ft_philosopher_life, \
 				table->philosophers_set.philosophers + i);
 		table->philosophers_set.philosophers[i].thread = thread_id;

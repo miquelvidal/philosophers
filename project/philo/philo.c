@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:48:04 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/01 17:01:17 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:15:30 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "ft_thread.h"
 #include "ft_philosopher.h"
 
+//https://github.com/DeRuina/philosophers/blob/main/src/threads.c
 
 void    ft_main_check_simulation(t_table *table)
 {
@@ -91,9 +92,11 @@ int main(int argc, char **argv)
 	t_args          args;
 	t_table         table;
  
-	if (ft_args_validate(argv, argc) == FALSE)
+	if (ft_args_validate_format(argv, argc) == FALSE)
 		return (EXIT_FAILURE);
 	args    = ft_args_parse(argv, argc);
+	if (ft_args_validate_value(args) == FALSE)
+		return (EXIT_FAILURE);
 	table   = ft_table_init(args);
 	if (ft_main_check_init(&table) == -1)
 		return (1);

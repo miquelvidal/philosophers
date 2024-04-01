@@ -6,7 +6,7 @@
 /*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:03:25 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/01 17:08:31 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:27:01 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 typedef struct s_philosopher
 {
+	int				total;
 	int          	number;
 	int				status;
 	t_fork			*l_fork;

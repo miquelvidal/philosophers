@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: greus-ro <greus-ro@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:14:51 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/03/19 23:10:18 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/02 00:26:09 by greus-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_args.h"
 #include "ft_utils.h"
 
-t_bool	ft_args_validate(char **argv, int argc)
+t_bool	ft_args_validate_format(char **argv, int argc)
 {
 	size_t	i;
 	
@@ -48,4 +48,13 @@ t_args	ft_args_parse(char **argv, int argc)
 	if (argc == 6)
 		args.num_must_eat	=	ft_utils_atoi(argv[5]);
 	return (args);
+}
+
+t_bool	ft_args_validate_value(t_args	args)
+{
+	if (args.num_philo > 0)
+		return (TRUE);
+	else
+		return (FALSE);
+	
 }
