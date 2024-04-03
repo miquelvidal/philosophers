@@ -6,15 +6,17 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/03 20:35:34 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/03 21:42:26 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ft_fork.h"
 #include "ft_timestamp.h"
 
+/*
 t_fork	ft_fork_new(size_t num)
 {
 	t_fork	fork;
@@ -23,6 +25,7 @@ t_fork	ft_fork_new(size_t num)
 	pthread_mutex_init(&fork.mutex, NULL);
 	return (fork);
 }
+*/
 
 t_fork_set	ft_forks_init(size_t total)
 {
@@ -35,10 +38,16 @@ t_fork_set	ft_forks_init(size_t total)
 		_forks.forks = 0;
 		return (_forks);
 	}
+	memset(_forks.forks, 0, total * sizeof(t_fork));
 	i = 0;
 	while (i < total)
 	{
-		_forks.forks[i] = ft_fork_new(i);
+		_forks.forks[i].num_fork = i;
+		if (pthread_mutex_init(&_forks.forks[i].mutex, NULL) < 0)
+		{
+			ft_forks_destroy(&_forks);
+			return (_forks);
+		}
 		i++;
 	}
 	_forks.num_forks = total;

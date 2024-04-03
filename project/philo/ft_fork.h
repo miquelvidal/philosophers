@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fork.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:31:46 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/02 18:21:45 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:38:52 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_fork_set
 	size_t	num_forks;
 }	t_fork_set;
 
-t_fork		ft_fork_new(size_t num);
+//t_fork		ft_fork_new(size_t num);
 t_fork_set	ft_forks_init(size_t total);
 void		ft_forks_destroy(t_fork_set *forks);
 int			ft_fork_pickup(t_fork *fork);
