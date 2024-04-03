@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philosopher.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:25:18 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/02 19:36:58 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:45:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,23 @@ t_philosopher_set	ft_philosophers_init(t_args args, t_fork_set forks, \
 	return (philo);
 }
 
-/*
-void	ft_philosopher_free(t_philosopher *philosophers)
+void	ft_philosopher_destroy(t_philosopher *philosopher)
 {
-	philosophers++;
+	pthread_mutex_destroy(&philosopher->meals.mutex);
 }
-*/
+
 void	ft_philosophers_destroy(t_philosopher_set *philo)
 {
+	size_t	i;
+
 	if (philo->philosophers != NULL)
 	{
+		i = 0;
+		while (i < philo->total)
+		{
+			ft_philosopher_destroy(philo->philosophers + i);
+			i++;
+		}
 		free (philo->philosophers);
 		philo->philosophers = NULL;
 	}

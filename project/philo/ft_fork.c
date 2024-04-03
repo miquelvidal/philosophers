@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/02 23:04:03 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/03 20:35:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	ft_forks_destroy(t_fork_set *_forks)
 		i = 0;
 		while (i < _forks->num_forks)
 		{
-//            printf("UNLOCKING\n");
-//            pthread_mutex_unlock(&_forks->forks[i].mutex);
 			pthread_mutex_destroy(&_forks->forks[i].mutex);
 			i++;
 		}

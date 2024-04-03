@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:19:28 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/03 20:26:04 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/03 20:57:10 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	ft_thread_create_threads(t_table *table)
 		philo = table->philosophers_set.philosophers + i;
 		philo->start_time = table->start_time;
 		philo->meals.timestamp = table->start_time;
-		philo->end = table->end;
-		philo->log = table->log;
-		//philo->start = &table->start;
+		philo->end = &table->end;
+		philo->log = &table->log;
+		philo->start = &table->start;
 		philo->rules = table->rules;
 		if (philo->number % 2 == 0)
 			ft_sleep(1);
@@ -68,18 +68,12 @@ int	ft_thread_join_threads(t_philosopher_set *philo)
 void	ft_thread_printf(t_philosopher *philo, const char *str, \
 			t_timestamp time)
 {
-	
-		//pthread_mutex_lock(&philo->log->mutex);
-//        if (ft_mutex_bvalue_get(philo->end) ==  FALSE)
-//	{
-		pthread_mutex_lock(&philo->log.mutex);
-		if (ft_mutex_bvalue_get(&philo->end) == FALSE)
-		{
-			printf("%llu", time);
-			printf(" %d ", philo->number);
-			printf("%s\n", str);
-		}
-		pthread_mutex_unlock(&philo->log.mutex);
-//   }
-		//pthread_mutex_unlock(&philo->log->mutex);
+	pthread_mutex_lock(&philo->log->mutex);
+	if (ft_mutex_bvalue_get(philo->end) == FALSE)
+	{
+		printf("%llu", time);
+		printf(" %d ", philo->number);
+		printf("%s\n", str);
+	}
+	pthread_mutex_unlock(&philo->log->mutex);
 }

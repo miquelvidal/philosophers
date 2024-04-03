@@ -19,6 +19,7 @@ SRC_FILES=	ft_args.c				\
 			ft_mutex_meal2.c		\
 			ft_philosopher.c		\
 			ft_philosopher2.c		\
+			ft_philosopher3.c		\
 			ft_rules.c				\
 			ft_sleep.c				\
 			ft_table.c				\
