@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:58:06 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/03 21:11:27 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/04 22:38:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	ft_philosopher_pickup_forks(t_philosopher *philo)
 {
 	t_timestamp	timestamp;
 
-	timestamp = ft_timestamp_get();
 	ft_fork_pickup(philo->l_fork);
+    timestamp = ft_timestamp_get();
 	ft_thread_printf(philo, "has taken a fork", timestamp - philo->start_time);
 	if (philo->total == 1)
 	{
