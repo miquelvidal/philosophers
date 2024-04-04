@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 23:33:37 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/03 21:42:26 by gabriel          ###   ########.fr       */
+/*   Created: 2024/04/04 23:50:24 by greus-ro          #+#    #+#             */
+/*   Updated: 2024/04/04 23:51:53 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include <string.h>
 #include "ft_fork.h"
 #include "ft_timestamp.h"
-
-/*
-t_fork	ft_fork_new(size_t num)
-{
-	t_fork	fork;
-
-	fork.num_fork = num;
-	pthread_mutex_init(&fork.mutex, NULL);
-	return (fork);
-}
-*/
 
 t_fork_set	ft_forks_init(size_t total)
 {
@@ -72,13 +61,15 @@ void	ft_forks_destroy(t_fork_set *_forks)
 	}
 }
 
-int	ft_fork_pickup(t_fork *fork)
+int	ft_fork_pickup(t_fork *fork, int philosopher, int hand)
 {
 	int	mutex_return;
 
 	if (fork != NULL)
 	{
 		mutex_return = pthread_mutex_lock(&fork->mutex);
+		fork->philosopher = philosopher;
+		fork->hand = hand;
 		return (mutex_return);
 	}
 	return (0);
@@ -90,6 +81,8 @@ int	ft_fork_drop(t_fork *fork)
 
 	if (fork != NULL)
 	{
+		fork->philosopher = -1;
+		fork->hand = -1;
 		mutex_return = pthread_mutex_unlock(&fork->mutex);
 		return (mutex_return);
 	}

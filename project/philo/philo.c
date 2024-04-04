@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:48:04 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/04 22:29:31 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/04 23:45:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 #include "ft_thread.h"
 #include "ft_philosopher.h"
 
-//https://github.com/DeRuina/philosophers/blob/main/src/threads.c
-
+/*
+	This function checks death condition and number of meals
+	(if it is informed) of a philosopher.
+	It prints 
+*/
 int	ft_main_check_philo(t_philosopher *philo, t_bool *bn_meals)
 {
 	t_timestamp	now;
@@ -44,6 +47,10 @@ int	ft_main_check_philo(t_philosopher *philo, t_bool *bn_meals)
 	return (0);
 }
 
+/*
+	This function checks all the philosophers calling ft_main_check_philo
+	for each philosopher.
+*/
 void	ft_main_check_simulation(t_table *table)
 {
 	int			i;
@@ -66,6 +73,9 @@ void	ft_main_check_simulation(t_table *table)
 		ft_mutex_bvalue_set(&table->end, TRUE);
 }
 
+/*
+	This function runs simulation until an end condition is found.
+*/
 void	ft_main_run_simulation(t_table *table)
 {
 	while (ft_mutex_bvalue_get(&table->end) == FALSE)
@@ -74,6 +84,10 @@ void	ft_main_run_simulation(t_table *table)
 	}
 }
 
+/*
+	This function checks if the forks and the philosophers were
+	initialized correct. If not, it destroys and free resources.
+*/
 int	ft_main_check_init(t_table *table)
 {
 	if (table->philosophers_set.philosophers == NULL || \
@@ -85,6 +99,17 @@ int	ft_main_check_init(t_table *table)
 	return (1);
 }
 
+/*
+	main does:
+		1. Validate format of args.
+		2. Validate value of args.
+		3. Initializes the table structure
+		4. Validate table has created fine.
+		5. Create threads, one per philosopher.
+		6. Run simulation (it will check end conditions infinte...)
+		7. Finally do the join of threads to free resorces.
+		8. Free table resources.
+*/
 int	main(int argc, char **argv)
 {
 	t_args		args;

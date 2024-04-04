@@ -1,7 +1,7 @@
 NAME=philo
 #CDEBUG = -g3 -fsanitize=address
 CDEBUG = -g3
-PTHREAD_FLAG = -pthread
+#PTHREAD_FLAG = -lpthread
 CFLAGS=-Wall -Wextra -Werror -MMD -MP ${CDEBUG} ${PTHREAD_FLAG}
 
 SRC_DIR=.

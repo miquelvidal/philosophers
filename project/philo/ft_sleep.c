@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: greus-ro <greus-ro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 23:24:21 by greus-ro          #+#    #+#             */
-/*   Updated: 2024/04/02 18:40:46 by greus-ro         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:59:55 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_sleep(unsigned long millisecs)
 	now = init_time;
 	while (now - init_time < millisecs)
 	{
-		err = usleep(50);
+		err = usleep(500);
 		if (err < 0)
 			return (err);
 		now = ft_timestamp_get();

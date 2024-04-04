@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 23:19:28 by gabriel           #+#    #+#             */
-/*   Updated: 2024/04/03 20:57:10 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/04/04 23:42:09 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 #include "ft_philosopher.h"
 #include "ft_table.h"
 #include "ft_sleep.h"
-
 #include <stdio.h>
-//https://man7.org/linux/man-pages/man3/pthread_create.3.html
-//https://github.com/DeRuina/philosophers/blob/main/src/threads.c
 
+/*
+	Sleep 
+*/
 int	ft_thread_sleep(int microseconds)
 {
 	return (usleep(microseconds));
 }
 
-//int ft_thread_create_threads(t_philosopher_set *philo)
 int	ft_thread_create_threads(t_table *table)
 {
 	size_t			i;
@@ -52,6 +51,9 @@ int	ft_thread_create_threads(t_table *table)
 	return (0);
 }
 
+/*
+	We do join of all threads to free resources.
+*/
 int	ft_thread_join_threads(t_philosopher_set *philo)
 {
 	size_t	i;
@@ -65,6 +67,11 @@ int	ft_thread_join_threads(t_philosopher_set *philo)
 	return (0);
 }
 
+/*
+	We print at threads with this function. 
+	First we block the log (only one thread can write)
+	Then we check that the simulation is NOT over.
+*/
 void	ft_thread_printf(t_philosopher *philo, const char *str, \
 			t_timestamp time)
 {
