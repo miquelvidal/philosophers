@@ -1,2 +1,2 @@
 # philosophers
-Philosophers project from Badalona 43
+Philosophers project from lost to the river
